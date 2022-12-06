@@ -32,7 +32,9 @@ enum preonic_keycodes {
   DVORAK,
   LOWER,
   RAISE,
-  BACKLIT
+  BACKLIT,
+  HTN,
+  TEST
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -72,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_WIN] = LAYOUT_preonic_grid(
-  QK_GESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
+  QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_DEL,
   KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
@@ -83,20 +85,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Tab  |   "  |   ,  |   .  |   P  |   Y  |   F  |   G  |   C  |   R  |   L  | Del  |
+ * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Del  |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Esc  |   A  |   O  |   E  |   U  |   I  |   D  |   H  |   T  |   N  |   S  |  /   |
+ * | Esc  |   A  |   S  |   D  |   F  |   G  |  HTN |   J  |   K  |   L  |   ;  |  "   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Shift|   ;  |   Q  |   J  |   K  |   X  |   B  |   M  |   W  |   V  |   Z  |Enter |
+ * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Brite| Ctrl | Alt  | GUI  |Lower |    Space    |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_DVORAK] = LAYOUT_preonic_grid(
-  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
-  KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_DEL,
-  KC_ESC,  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_SLSH,
-  KC_LSFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_ENT,
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+  _______, _______, _______, _______, _______, TEST,    _______, _______, _______, _______, _______, _______,
+  KC_1,    _______, _______, _______, _______, _______, HTN,     _______, _______, _______, _______, _______,
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
   BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
@@ -168,6 +170,88 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+        /*case backup example:
+          if (record->event.pressed)
+          {
+            SEND_STRING(SS_LCTL("c") SS_DELAY(500) SS_LGUI("v") SS_TAP(X_ENTER));
+          }
+          break;*/
+        case HTN:
+          if (record->event.pressed)
+          {
+            SEND_STRING(
+            //set win 1 as excel window and win 2 as the epic window
+            //In excel: highlight cell of patient UID
+            SS_LCTL("c") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(100)
+            //Switch to epic and open orders only enounter
+            SS_LGUI("2") SS_DELAY(100) SS_LCTL("5")
+            //Fill in the details for orders only encounter
+            //this next line is shift tabbing x6 to the CSN
+            SS_LSFT(SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB))
+            // Pasting in the CSN and then opening the orders only encounter
+            SS_LCTL("v") SS_DELAY(100) SS_LALT("fs") SS_DELAY(100)
+            //switching back to excel to copy the date
+            SS_LGUI("1") SS_DELAY(100) SS_LCTL(SS_TAP(X_RGHT)) SS_DELAY(100) SS_LCTL("c") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(5000)
+            //switch back to epic and open up orders
+            SS_LGUI("2") SS_DELAY(5000) SS_LCTL("o") SS_DELAY(3000)
+
+            //at order specific section
+            "hypertensive panel" SS_DELAY(200) SS_TAP(X_ENTER)
+            SS_LALT("f") SS_DELAY(200) SS_TAP(X_ENTER) SS_DELAY(5000)
+            SS_LCTL("v") //paste back the date
+
+            );
+          }
+          break;
+        case TEST:
+          if (record->event.pressed)
+          {
+            SEND_STRING(
+
+            //set win 1 as excel window and win 2 as the epic window
+            //In excel: highlight cell of patient UID
+            SS_LCTL("c")  SS_DELAY(100)
+            //TESTCASE ONLY////Switch to epic and open orders only enounter
+            SS_LGUI("2") SS_DELAY(100) SS_LCTL("1")
+            //Fill in the details for orders only encounter
+            //find pt specific for test case
+            SS_TAP(X_TAB) SS_DELAY(100)
+            SS_LCTL("v") SS_DELAY(100) SS_TAP(X_TAB) SS_DELAY(100) "threee" SS_DELAY(100) SS_LALT("fs") SS_DELAY(10000)
+            //switching back to excel to copy the date
+            SS_LGUI("1") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(100) SS_LCTL(SS_TAP(X_RGHT)) SS_DELAY(100) SS_LCTL("c")SS_DELAY(5000)
+            //TESTCASE ONLY//enter encounter
+            SS_LGUI("2") SS_DELAY(100)SS_LALT("n") SS_DELAY(10000)
+            //switch back to epic and open up orders
+            SS_LCTL("o") SS_DELAY(3000)
+
+            //at order specific section
+            "hypertensive panel" SS_DELAY(200) SS_TAP(X_ENTER) SS_DELAY(2000)
+            SS_LALT("f") SS_DELAY(200) SS_TAP(X_ENTER) SS_DELAY(5000)
+            SS_LCTL("v") //paste back the date
+
+
+            // //set win 1 as excel window and win 2 as the epic window
+            // //highlight cell of UID and copy
+            // SS_LCTL("c") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(100) SS_LGUI("2") SS_DELAY(100) SS_LCTL("1") SS_DELAY(100)
+            // //find pt specific for test case
+            // SS_TAP(X_TAB) SS_DELAY(100)
+            // SS_LCTL("v") SS_DELAY(100) SS_TAP(X_TAB) SS_DELAY(100) "threee" SS_DELAY(100) SS_LALT("fs") SS_DELAY(10000)
+            // //switching back to excel to copy the date
+            // SS_LGUI("1") SS_DELAY(100) SS_LCTL(SS_TAP(X_RGHT)) SS_DELAY(100) SS_LCTL("c") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(5000)
+            // //switch back to epic and open up orders
+            // SS_LGUI("2") SS_DELAY(5000) SS_LCTL("o") SS_DELAY(3000)
+            // //enter encounter
+            // SS_LALT("n") SS_DELAY(10000)
+            // //open order section
+            // SS_LCTL("o") SS_DELAY(500)
+            // //at order section
+            // "hypertensive panel" SS_DELAY(200) SS_TAP(X_ENTER)
+            // SS_LALT("f") SS_DELAY(200) SS_TAP(X_ENTER) SS_DELAY(5000)
+            // SS_LCTL("v") //paste back the date
+
+            );
+          }
+          break;
         case QWERTY:
           if (record->event.pressed) {
             set_single_persistent_default_layer(_QWERTY);
