@@ -201,6 +201,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             "hypertensive panel" SS_DELAY(200) SS_TAP(X_ENTER) SS_DELAY(2000)
             SS_LALT("f") SS_DELAY(2000) SS_TAP(X_ENTER) SS_DELAY(2000)
             SS_LCTL("v") //paste back the date
+            SS_DELAY(2000)
 
             //sending order
             SS_LALT("s") SS_DELAY(1000)
