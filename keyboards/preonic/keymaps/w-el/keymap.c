@@ -182,22 +182,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SEND_STRING(
             //set win 1 as excel window and win 2 as the epic window
             //In excel: highlight cell of patient UID
-            SS_LCTL("c") SS_DELAY(100)
+            SS_LCTL("c") SS_DELAY(100) SS_LGUI("m") SS_DELAY(100)
             //Switch to epic and open orders only enounter
-            SS_LGUI("2") SS_DELAY(100) SS_LCTL("5")
+            SS_LGUI("2") SS_DELAY(100) SS_LCTL("w") SS_DELAY(5000) SS_LCTL("5")
             //Fill in the details for orders only encounter
-            //this next line is shift tabbing x6 to the CSN
-            SS_LSFT(SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB))
+            //this next line is shift tabbing to the CSN (x6 for clinic pc, x7 for corp laptop)
+            SS_LSFT(SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)) //Clinic
+            //SS_LSFT(SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)) //Corp laptop
+
             // Pasting in the CSN and then opening the orders only encounter
             SS_LCTL("v") SS_DELAY(100) SS_LALT("fs") SS_DELAY(1000)
             //switching back to excel to copy the date
-            SS_LGUI("1") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(100) SS_LCTL(SS_TAP(X_RGHT)) SS_DELAY(100) SS_LCTL("c") SS_DELAY(5000)
+            SS_LGUI("m") SS_DELAY(100) SS_LGUI("1") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(100) SS_LCTL(SS_TAP(X_RGHT)) SS_DELAY(100) SS_LCTL("c") SS_DELAY(5000)
             //switch back to epic and open up orders
-            SS_LGUI("2") SS_DELAY(1000) SS_LCTL("o") SS_DELAY(1000)
+            SS_LGUI("m") SS_DELAY(100) SS_LGUI("2") SS_DELAY(1000) SS_LCTL("o") SS_DELAY(1000)
 
             //at order specific section
             "hypertensive panel" SS_DELAY(200) SS_TAP(X_ENTER) SS_DELAY(2000)
-            SS_LALT("f") SS_DELAY(200) SS_TAP(X_ENTER) SS_DELAY(2000)
+            SS_LALT("f") SS_DELAY(2000) SS_TAP(X_ENTER) SS_DELAY(2000)
             SS_LCTL("v") //paste back the date
 
             );
