@@ -180,7 +180,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             //In excel: highlight cell of patient UID
             SS_LCTL("c") SS_DELAY(100) SS_LGUI("m") SS_DELAY(100)
             //Switch to epic and open orders only enounter
-            SS_LGUI("2") SS_DELAY(100) SS_LCTL("w") SS_DELAY(5000) SS_LCTL("5")
+            SS_LGUI("2") SS_DELAY(100) SS_LCTL("w") SS_DELAY(4000) SS_LCTL("5")
             //Fill in the details for orders only encounter
             //this next line is  tabbing to the CSN x10¸
             SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) //Clinic
@@ -188,7 +188,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             //SS_LSFT(SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)) //Corp laptop
 
             // Pasting in the CSN and then opening the orders only encounter
-            SS_DELAY(1000) SS_LCTL("v") SS_DELAY(1000) SS_LALT("fs") SS_DELAY(1000)
+            SS_DELAY(1000) SS_LCTL("v") SS_DELAY(1000) SS_LALT("fs") SS_DELAY(1500)
             //switching back to excel to copy the date
             SS_LGUI("m") SS_DELAY(100) SS_LGUI("1") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(100) SS_LCTL(SS_TAP(X_RGHT)) SS_DELAY(100) SS_LCTL("c") SS_DELAY(5000)
             //switch back to epic and open up orders
@@ -202,7 +202,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
             //sending order
             SS_LALT("s") SS_DELAY(1000)
-            SS_LCTL(SS_LSFT("e")) SS_DELAY(5000)
+            SS_LCTL(SS_LSFT("e")) SS_DELAY(3000)
 
             //MOVING BACK TO EXCEL AND SORTING THE FILE
             //switch to excel
@@ -233,7 +233,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             //In excel: highlight cell of patient UID
             SS_LCTL("c") SS_DELAY(100) SS_LGUI("m") SS_DELAY(100)
             //Switch to epic and open orders only enounter
-            SS_LGUI("2") SS_DELAY(100) SS_LCTL("w") SS_DELAY(5000) SS_LCTL("5")
+            SS_LGUI("2") SS_DELAY(100) SS_LCTL("w") SS_DELAY(4000) SS_LCTL("5")
             //Fill in the details for orders only encounter
             //this next line is  tabbing to the CSN x10¸
             SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) //Clinic
@@ -241,7 +241,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             //SS_LSFT(SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)) //Corp laptop
 
             // Pasting in the CSN and then opening the orders only encounter
-            SS_DELAY(1000) SS_LCTL("v") SS_DELAY(1000) SS_LALT("fs") SS_DELAY(1000)
+            SS_DELAY(1000) SS_LCTL("v") SS_DELAY(1000) SS_LALT("fs") SS_DELAY(1500)
             //switching back to excel to copy the date
             SS_LGUI("m") SS_DELAY(100) SS_LGUI("1") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(100) SS_LCTL(SS_TAP(X_RGHT)) SS_DELAY(100) SS_LCTL("c") SS_DELAY(5000)
             //switch back to epic and open up orders
@@ -255,7 +255,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
             //sending order
             SS_LALT("s") SS_DELAY(1000)
-            SS_LCTL(SS_LSFT("e")) SS_DELAY(5000)
+            SS_LCTL(SS_LSFT("e")) SS_DELAY(3000)
 
             //MOVING BACK TO EXCEL AND SORTING THE FILE
             //switch to excel
