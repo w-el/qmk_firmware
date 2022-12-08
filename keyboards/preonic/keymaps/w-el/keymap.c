@@ -387,7 +387,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SS_LALT("o") SS_DELAY(200)
             SS_LCTL("s")
 
-            //sending order
+            //sending orders
             SS_LALT("s") SS_DELAY(1000)
             SS_LCTL(SS_LSFT("e")) SS_DELAY(3000)
 
