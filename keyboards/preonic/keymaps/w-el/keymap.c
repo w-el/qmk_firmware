@@ -792,7 +792,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SEND_STRING(
             //set win 1 as excel window and win 2 as the epic window
             //In excel: highlight cell of patient UID
-            SS_LCTL("c") SS_DELAY(100) SS_LGUI("m") SS_DELAY(100)
+            SS_LCTL("c") SS_DELAY(100) SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100) SS_LGUI("m") SS_DELAY(100) SS_LGUI("1") SS_DELAY(100)
             //Switch to epic and open patient lookup
             SS_LGUI("2") SS_DELAY(100) SS_LCTL("w") SS_DELAY(2000) SS_LCTL("1")
             //Fill in the details for orders only encounter
