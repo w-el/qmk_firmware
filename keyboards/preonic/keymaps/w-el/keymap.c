@@ -38,6 +38,7 @@ enum preonic_keycodes {
   DM,
   CSN_OPEN,
   CHECK,
+  INR,
   TEST
 };
 
@@ -57,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = LAYOUT_preonic_grid(
-  QK_GESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
+  QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_DEL,
   KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
@@ -100,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_DVORAK] = LAYOUT_preonic_grid(
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-  _______, _______, _______, _______, _______, TEST,    _______, _______, _______,CSN_OPEN, CHECK,   _______,
+  _______, _______, _______, _______, _______, TEST,    _______, _______, INR,    CSN_OPEN, CHECK,   _______,
   KC_1,    _______, _______, DM,      _______, _______, HTN,     _______, _______, LINE,    _______, _______,
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
   BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
@@ -174,6 +175,62 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+        case INR:
+          if (record->event.pressed)
+          {
+            SEND_STRING(
+            //set win 1 as excel window and win 2 as the epic window
+            //In excel: highlight cell of patient UID
+            SS_LCTL("c") SS_DELAY(100) SS_LGUI("m") SS_DELAY(100)
+            //Switch to epic and open orders only enounter
+            SS_LGUI("2") SS_DELAY(100) SS_LCTL("w") SS_DELAY(4000) SS_LCTL("5")
+            //Fill in the details for orders only encounter
+            //this next line is  tabbing to the CSN x10¸
+            SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) //Clinic
+            SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)
+            //SS_LSFT(SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)) //Corp laptop
+
+            // Pasting in the CSN and then opening the orders only encounter
+            SS_DELAY(1000) SS_LCTL("v") SS_DELAY(1000) SS_LALT("fs") SS_DELAY(1500)
+            //switching back to excel to copy the date
+            SS_LGUI("m") SS_DELAY(100) SS_LGUI("1") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(100) SS_LCTL(SS_TAP(X_RGHT)) SS_DELAY(100) SS_LCTL("c")
+            //Delay excel -> epic opening orders field
+            SS_DELAY(4000)
+            //switch back to epic and open up orders
+            SS_LGUI("m") SS_DELAY(100) SS_LGUI("2") SS_DELAY(1000) SS_LCTL("o") SS_DELAY(1000)
+
+            //at order specific section
+            "INR POCT" SS_DELAY(200) SS_TAP(X_ENTER) SS_DELAY(2000)
+            SS_LALT("f") SS_DELAY(2000) SS_TAP(X_ENTER) SS_DELAY(4000)
+            SS_LCTL("v") SS_DELAY(200) //paste back the date
+            SS_TAP(X_TAB) "on" //for "on arrival"
+            SS_DELAY(2000)
+
+            //sending order
+            SS_LALT("s") SS_DELAY(1000)
+            SS_LCTL(SS_LSFT("e")) SS_DELAY(3000)
+
+            //MOVING BACK TO EXCEL AND SORTING THE FILE
+            //switch to excel
+            SS_LGUI("m") SS_LGUI("2") SS_DELAY(1000) SS_LGUI("1") SS_DELAY(1000) SS_TAP(X_ESC) SS_DELAY(100)
+            //add comment of what lab it is
+            SS_TAP(X_RGHT) "INR OA"
+            //shift cursor back to left most cell
+            SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100)
+            // //select row
+            SS_LSFT(SS_TAP(X_SPC))
+            //highlight row
+            SS_LALT("h") SS_DELAY(100) "h" SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100) SS_TAP(X_ENTER) SS_DELAY(100)
+            //move down cell to next row
+            SS_TAP(X_DOWN)
+            //save the file
+            SS_LCTL("s")
+
+
+
+            );
+          }
+          break;
         case HTN:
           if (record->event.pressed)
           {
@@ -405,7 +462,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             //move down cell to next row
             SS_TAP(X_DOWN)
             //save the file
-            SS_LCTL("s")
+            // SS_LCTL("s")
 
 
 
