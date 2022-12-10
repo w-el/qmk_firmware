@@ -43,6 +43,7 @@ enum preonic_keycodes {
   HEP_DIAG,
   HEP_SCR,
   NAK,
+  HTN_SINGLE,
   TEST
 };
 
@@ -459,12 +460,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             //save the file
             SS_LCTL("s")
 
-
-
             );
           }
           break;
-        case HTN:
+
+
+        case HTN_SINGLE:
           if (record->event.pressed)
           {
             SEND_STRING(
@@ -516,11 +517,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             // SS_LCTL("s")
             SS_DELAY(1000)
 
+
+
+            );
+          }
+          break;
+
+
+        case HTN:
+          if (record->event.pressed)
+          {
+            SEND_STRING(
             //set win 1 as excel window and win 2 as the epic window
             //In excel: highlight cell of patient UID
             SS_LCTL("c") SS_DELAY(100) SS_LGUI("m") SS_DELAY(100)
             //Switch to epic and open orders only enounter
-            SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LCTL("w") SS_DELAY(4000) SS_LCTL("5")
+            SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LCTL("w") SS_DELAY(1000) SS_LCTL("5")
             //Fill in the details for orders only encounter
             //this next line is  tabbing to the CSN x10¸
             SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) //Clinic
@@ -532,26 +544,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             //switching back to excel to copy the date
             SS_LGUI("m") SS_DELAY(100) SS_LGUI("1") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(100) SS_LCTL(SS_TAP(X_RGHT)) SS_DELAY(100) SS_LCTL("c")
             //Delay excel -> epic opening orders field
-            SS_DELAY(4000)
-            //switch back to epic and open up orders
+            SS_DELAY(1000)
+            //switch back to epic and open up
             SS_LGUI("m") SS_DELAY(100) SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP))SS_DELAY(1000) SS_LCTL("o") SS_DELAY(1000)
 
             //at order specific section
             "hypertensive panel" SS_DELAY(200) SS_TAP(X_ENTER) SS_DELAY(2000)
-            SS_LALT("f") SS_DELAY(2000) SS_TAP(X_ENTER) SS_DELAY(4000)
+            SS_LALT("f") SS_DELAY(2000) SS_TAP(X_ENTER) SS_DELAY(2000)
             SS_LCTL("v") //paste back the date
             SS_DELAY(2000)
 
             //sending order
             SS_LALT("s") SS_DELAY(1000)
-            SS_LCTL(SS_LSFT("e")) SS_DELAY(3000)
+            SS_LCTL(SS_LSFT("e")) SS_DELAY(1000)
 
             //MOVING BACK TO EXCEL AND SORTING THE FILE
             //switch to excel
             SS_LGUI("m") SS_LGUI("2") SS_DELAY(1000) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP))
             SS_DELAY(1000) SS_LGUI("1") SS_DELAY(1000) SS_TAP(X_ESC) SS_DELAY(100)
             //add comment of what lab it is
-            SS_TAP(X_RGHT) "HTN 02"
+            SS_TAP(X_RGHT) "HTN 01"
             //shift cursor back to left most cell
             SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100)
             // //select row
@@ -563,397 +575,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             //save the file
             // SS_LCTL("s")
             SS_DELAY(1000)
-
-            //set win 1 as excel window and win 2 as the epic window
-            //In excel: highlight cell of patient UID
-            SS_LCTL("c") SS_DELAY(100) SS_LGUI("m") SS_DELAY(100)
-            //Switch to epic and open orders only enounter
-            SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LCTL("w") SS_DELAY(4000) SS_LCTL("5")
-            //Fill in the details for orders only encounter
-            //this next line is  tabbing to the CSN x10¸
-            SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) //Clinic
-            SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)
-            //SS_LSFT(SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)) //Corp laptop
-
-            // Pasting in the CSN and then opening the orders only encounter
-            SS_DELAY(1000) SS_LCTL("v") SS_DELAY(1000) SS_LALT("fs") SS_DELAY(1500)
-            //switching back to excel to copy the date
-            SS_LGUI("m") SS_DELAY(100) SS_LGUI("1") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(100) SS_LCTL(SS_TAP(X_RGHT)) SS_DELAY(100) SS_LCTL("c")
-            //Delay excel -> epic opening orders field
-            SS_DELAY(4000)
-            //switch back to epic and open up orders
-            SS_LGUI("m") SS_DELAY(100) SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP))SS_DELAY(1000) SS_LCTL("o") SS_DELAY(1000)
-
-            //at order specific section
-            "hypertensive panel" SS_DELAY(200) SS_TAP(X_ENTER) SS_DELAY(2000)
-            SS_LALT("f") SS_DELAY(2000) SS_TAP(X_ENTER) SS_DELAY(4000)
-            SS_LCTL("v") //paste back the date
-            SS_DELAY(2000)
-
-            //sending order
-            SS_LALT("s") SS_DELAY(1000)
-            SS_LCTL(SS_LSFT("e")) SS_DELAY(3000)
-
-            //MOVING BACK TO EXCEL AND SORTING THE FILE
-            //switch to excel
-            SS_LGUI("m") SS_LGUI("2") SS_DELAY(1000) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP))
-            SS_DELAY(1000) SS_LGUI("1") SS_DELAY(1000) SS_TAP(X_ESC) SS_DELAY(100)
-            //add comment of what lab it is
-            SS_TAP(X_RGHT) "HTN 03"
-            //shift cursor back to left most cell
-            SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100)
-            // //select row
-            SS_LSFT(SS_TAP(X_SPC))
-            //highlight row
-            SS_LALT("h") SS_DELAY(100) "h" SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100) SS_TAP(X_ENTER) SS_DELAY(100)
-            //move down cell to next row
-            SS_TAP(X_DOWN)
-            //save the file
-            // SS_LCTL("s")
-            SS_DELAY(1000)
-
-            //set win 1 as excel window and win 2 as the epic window
-            //In excel: highlight cell of patient UID
-            SS_LCTL("c") SS_DELAY(100) SS_LGUI("m") SS_DELAY(100)
-            //Switch to epic and open orders only enounter
-            SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LCTL("w") SS_DELAY(4000) SS_LCTL("5")
-            //Fill in the details for orders only encounter
-            //this next line is  tabbing to the CSN x10¸
-            SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) //Clinic
-            SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)
-            //SS_LSFT(SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)) //Corp laptop
-
-            // Pasting in the CSN and then opening the orders only encounter
-            SS_DELAY(1000) SS_LCTL("v") SS_DELAY(1000) SS_LALT("fs") SS_DELAY(1500)
-            //switching back to excel to copy the date
-            SS_LGUI("m") SS_DELAY(100) SS_LGUI("1") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(100) SS_LCTL(SS_TAP(X_RGHT)) SS_DELAY(100) SS_LCTL("c")
-            //Delay excel -> epic opening orders field
-            SS_DELAY(4000)
-            //switch back to epic and open up orders
-            SS_LGUI("m") SS_DELAY(100) SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP))SS_DELAY(1000) SS_LCTL("o") SS_DELAY(1000)
-
-            //at order specific section
-            "hypertensive panel" SS_DELAY(200) SS_TAP(X_ENTER) SS_DELAY(2000)
-            SS_LALT("f") SS_DELAY(2000) SS_TAP(X_ENTER) SS_DELAY(4000)
-            SS_LCTL("v") //paste back the date
-            SS_DELAY(2000)
-
-            //sending order
-            SS_LALT("s") SS_DELAY(1000)
-            SS_LCTL(SS_LSFT("e")) SS_DELAY(3000)
-
-            //MOVING BACK TO EXCEL AND SORTING THE FILE
-            //switch to excel
-            SS_LGUI("m") SS_LGUI("2") SS_DELAY(1000) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP))
-            SS_DELAY(1000) SS_LGUI("1") SS_DELAY(1000) SS_TAP(X_ESC) SS_DELAY(100)
-            //add comment of what lab it is
-            SS_TAP(X_RGHT) "HTN 04"
-            //shift cursor back to left most cell
-            SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100)
-            // //select row
-            SS_LSFT(SS_TAP(X_SPC))
-            //highlight row
-            SS_LALT("h") SS_DELAY(100) "h" SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100) SS_TAP(X_ENTER) SS_DELAY(100)
-            //move down cell to next row
-            SS_TAP(X_DOWN)
-            //save the file
-            // SS_LCTL("s")
-            SS_DELAY(1000)
-
-            //set win 1 as excel window and win 2 as the epic window
-            //In excel: highlight cell of patient UID
-            SS_LCTL("c") SS_DELAY(100) SS_LGUI("m") SS_DELAY(100)
-            //Switch to epic and open orders only enounter
-            SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LCTL("w") SS_DELAY(4000) SS_LCTL("5")
-            //Fill in the details for orders only encounter
-            //this next line is  tabbing to the CSN x10¸
-            SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) //Clinic
-            SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)
-            //SS_LSFT(SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)) //Corp laptop
-
-            // Pasting in the CSN and then opening the orders only encounter
-            SS_DELAY(1000) SS_LCTL("v") SS_DELAY(1000) SS_LALT("fs") SS_DELAY(1500)
-            //switching back to excel to copy the date
-            SS_LGUI("m") SS_DELAY(100) SS_LGUI("1") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(100) SS_LCTL(SS_TAP(X_RGHT)) SS_DELAY(100) SS_LCTL("c")
-            //Delay excel -> epic opening orders field
-            SS_DELAY(4000)
-            //switch back to epic and open up orders
-            SS_LGUI("m") SS_DELAY(100) SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP))SS_DELAY(1000) SS_LCTL("o") SS_DELAY(1000)
-
-            //at order specific section
-            "hypertensive panel" SS_DELAY(200) SS_TAP(X_ENTER) SS_DELAY(2000)
-            SS_LALT("f") SS_DELAY(2000) SS_TAP(X_ENTER) SS_DELAY(4000)
-            SS_LCTL("v") //paste back the date
-            SS_DELAY(2000)
-
-            //sending order
-            SS_LALT("s") SS_DELAY(1000)
-            SS_LCTL(SS_LSFT("e")) SS_DELAY(3000)
-
-            //MOVING BACK TO EXCEL AND SORTING THE FILE
-            //switch to excel
-            SS_LGUI("m") SS_LGUI("2") SS_DELAY(1000) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP))
-            SS_DELAY(1000) SS_LGUI("1") SS_DELAY(1000) SS_TAP(X_ESC) SS_DELAY(100)
-            //add comment of what lab it is
-            SS_TAP(X_RGHT) "HTN 05"
-            //shift cursor back to left most cell
-            SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100)
-            // //select row
-            SS_LSFT(SS_TAP(X_SPC))
-            //highlight row
-            SS_LALT("h") SS_DELAY(100) "h" SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100) SS_TAP(X_ENTER) SS_DELAY(100)
-            //move down cell to next row
-            SS_TAP(X_DOWN)
-            //save the file
-            // SS_LCTL("s")
-            SS_DELAY(1000)
-
-            //set win 1 as excel window and win 2 as the epic window
-            //In excel: highlight cell of patient UID
-            SS_LCTL("c") SS_DELAY(100) SS_LGUI("m") SS_DELAY(100)
-            //Switch to epic and open orders only enounter
-            SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LCTL("w") SS_DELAY(4000) SS_LCTL("5")
-            //Fill in the details for orders only encounter
-            //this next line is  tabbing to the CSN x10¸
-            SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) //Clinic
-            SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)
-            //SS_LSFT(SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)) //Corp laptop
-
-            // Pasting in the CSN and then opening the orders only encounter
-            SS_DELAY(1000) SS_LCTL("v") SS_DELAY(1000) SS_LALT("fs") SS_DELAY(1500)
-            //switching back to excel to copy the date
-            SS_LGUI("m") SS_DELAY(100) SS_LGUI("1") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(100) SS_LCTL(SS_TAP(X_RGHT)) SS_DELAY(100) SS_LCTL("c")
-            //Delay excel -> epic opening orders field
-            SS_DELAY(4000)
-            //switch back to epic and open up orders
-            SS_LGUI("m") SS_DELAY(100) SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP))SS_DELAY(1000) SS_LCTL("o") SS_DELAY(1000)
-
-            //at order specific section
-            "hypertensive panel" SS_DELAY(200) SS_TAP(X_ENTER) SS_DELAY(2000)
-            SS_LALT("f") SS_DELAY(2000) SS_TAP(X_ENTER) SS_DELAY(4000)
-            SS_LCTL("v") //paste back the date
-            SS_DELAY(2000)
-
-            //sending order
-            SS_LALT("s") SS_DELAY(1000)
-            SS_LCTL(SS_LSFT("e")) SS_DELAY(3000)
-
-            //MOVING BACK TO EXCEL AND SORTING THE FILE
-            //switch to excel
-            SS_LGUI("m") SS_LGUI("2") SS_DELAY(1000) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP))
-            SS_DELAY(1000) SS_LGUI("1") SS_DELAY(1000) SS_TAP(X_ESC) SS_DELAY(100)
-            //add comment of what lab it is
-            SS_TAP(X_RGHT) "HTN 06"
-            //shift cursor back to left most cell
-            SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100)
-            // //select row
-            SS_LSFT(SS_TAP(X_SPC))
-            //highlight row
-            SS_LALT("h") SS_DELAY(100) "h" SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100) SS_TAP(X_ENTER) SS_DELAY(100)
-            //move down cell to next row
-            SS_TAP(X_DOWN)
-            //save the file
-            // SS_LCTL("s")
-            SS_DELAY(1000)
-
-            //set win 1 as excel window and win 2 as the epic window
-            //In excel: highlight cell of patient UID
-            SS_LCTL("c") SS_DELAY(100) SS_LGUI("m") SS_DELAY(100)
-            //Switch to epic and open orders only enounter
-            SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LCTL("w") SS_DELAY(4000) SS_LCTL("5")
-            //Fill in the details for orders only encounter
-            //this next line is  tabbing to the CSN x10¸
-            SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) //Clinic
-            SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)
-            //SS_LSFT(SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)) //Corp laptop
-
-            // Pasting in the CSN and then opening the orders only encounter
-            SS_DELAY(1000) SS_LCTL("v") SS_DELAY(1000) SS_LALT("fs") SS_DELAY(1500)
-            //switching back to excel to copy the date
-            SS_LGUI("m") SS_DELAY(100) SS_LGUI("1") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(100) SS_LCTL(SS_TAP(X_RGHT)) SS_DELAY(100) SS_LCTL("c")
-            //Delay excel -> epic opening orders field
-            SS_DELAY(4000)
-            //switch back to epic and open up orders
-            SS_LGUI("m") SS_DELAY(100) SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP))SS_DELAY(1000) SS_LCTL("o") SS_DELAY(1000)
-
-            //at order specific section
-            "hypertensive panel" SS_DELAY(200) SS_TAP(X_ENTER) SS_DELAY(2000)
-            SS_LALT("f") SS_DELAY(2000) SS_TAP(X_ENTER) SS_DELAY(4000)
-            SS_LCTL("v") //paste back the date
-            SS_DELAY(2000)
-
-            //sending order
-            SS_LALT("s") SS_DELAY(1000)
-            SS_LCTL(SS_LSFT("e")) SS_DELAY(3000)
-
-            //MOVING BACK TO EXCEL AND SORTING THE FILE
-            //switch to excel
-            SS_LGUI("m") SS_LGUI("2") SS_DELAY(1000) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP))
-            SS_DELAY(1000) SS_LGUI("1") SS_DELAY(1000) SS_TAP(X_ESC) SS_DELAY(100)
-            //add comment of what lab it is
-            SS_TAP(X_RGHT) "HTN 07"
-            //shift cursor back to left most cell
-            SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100)
-            // //select row
-            SS_LSFT(SS_TAP(X_SPC))
-            //highlight row
-            SS_LALT("h") SS_DELAY(100) "h" SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100) SS_TAP(X_ENTER) SS_DELAY(100)
-            //move down cell to next row
-            SS_TAP(X_DOWN)
-            //save the file
-            // SS_LCTL("s")
-            SS_DELAY(1000)
-
-            //set win 1 as excel window and win 2 as the epic window
-            //In excel: highlight cell of patient UID
-            SS_LCTL("c") SS_DELAY(100) SS_LGUI("m") SS_DELAY(100)
-            //Switch to epic and open orders only enounter
-            SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LCTL("w") SS_DELAY(4000) SS_LCTL("5")
-            //Fill in the details for orders only encounter
-            //this next line is  tabbing to the CSN x10¸
-            SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) //Clinic
-            SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)
-            //SS_LSFT(SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)) //Corp laptop
-
-            // Pasting in the CSN and then opening the orders only encounter
-            SS_DELAY(1000) SS_LCTL("v") SS_DELAY(1000) SS_LALT("fs") SS_DELAY(1500)
-            //switching back to excel to copy the date
-            SS_LGUI("m") SS_DELAY(100) SS_LGUI("1") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(100) SS_LCTL(SS_TAP(X_RGHT)) SS_DELAY(100) SS_LCTL("c")
-            //Delay excel -> epic opening orders field
-            SS_DELAY(4000)
-            //switch back to epic and open up orders
-            SS_LGUI("m") SS_DELAY(100) SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP))SS_DELAY(1000) SS_LCTL("o") SS_DELAY(1000)
-
-            //at order specific section
-            "hypertensive panel" SS_DELAY(200) SS_TAP(X_ENTER) SS_DELAY(2000)
-            SS_LALT("f") SS_DELAY(2000) SS_TAP(X_ENTER) SS_DELAY(4000)
-            SS_LCTL("v") //paste back the date
-            SS_DELAY(2000)
-
-            //sending order
-            SS_LALT("s") SS_DELAY(1000)
-            SS_LCTL(SS_LSFT("e")) SS_DELAY(3000)
-
-            //MOVING BACK TO EXCEL AND SORTING THE FILE
-            //switch to excel
-            SS_LGUI("m") SS_LGUI("2") SS_DELAY(1000) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP))
-            SS_DELAY(1000) SS_LGUI("1") SS_DELAY(1000) SS_TAP(X_ESC) SS_DELAY(100)
-            //add comment of what lab it is
-            SS_TAP(X_RGHT) "HTN 08"
-            //shift cursor back to left most cell
-            SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100)
-            // //select row
-            SS_LSFT(SS_TAP(X_SPC))
-            //highlight row
-            SS_LALT("h") SS_DELAY(100) "h" SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100) SS_TAP(X_ENTER) SS_DELAY(100)
-            //move down cell to next row
-            SS_TAP(X_DOWN)
-            //save the file
-            // SS_LCTL("s")
-            SS_DELAY(1000)
-
-            //set win 1 as excel window and win 2 as the epic window
-            //In excel: highlight cell of patient UID
-            SS_LCTL("c") SS_DELAY(100) SS_LGUI("m") SS_DELAY(100)
-            //Switch to epic and open orders only enounter
-            SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LCTL("w") SS_DELAY(4000) SS_LCTL("5")
-            //Fill in the details for orders only encounter
-            //this next line is  tabbing to the CSN x10¸
-            SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) //Clinic
-            SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)
-            //SS_LSFT(SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)) //Corp laptop
-
-            // Pasting in the CSN and then opening the orders only encounter
-            SS_DELAY(1000) SS_LCTL("v") SS_DELAY(1000) SS_LALT("fs") SS_DELAY(1500)
-            //switching back to excel to copy the date
-            SS_LGUI("m") SS_DELAY(100) SS_LGUI("1") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(100) SS_LCTL(SS_TAP(X_RGHT)) SS_DELAY(100) SS_LCTL("c")
-            //Delay excel -> epic opening orders field
-            SS_DELAY(4000)
-            //switch back to epic and open up orders
-            SS_LGUI("m") SS_DELAY(100) SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP))SS_DELAY(1000) SS_LCTL("o") SS_DELAY(1000)
-
-            //at order specific section
-            "hypertensive panel" SS_DELAY(200) SS_TAP(X_ENTER) SS_DELAY(2000)
-            SS_LALT("f") SS_DELAY(2000) SS_TAP(X_ENTER) SS_DELAY(4000)
-            SS_LCTL("v") //paste back the date
-            SS_DELAY(2000)
-
-            //sending order
-            SS_LALT("s") SS_DELAY(1000)
-            SS_LCTL(SS_LSFT("e")) SS_DELAY(3000)
-
-            //MOVING BACK TO EXCEL AND SORTING THE FILE
-            //switch to excel
-            SS_LGUI("m") SS_LGUI("2") SS_DELAY(1000) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP))
-            SS_DELAY(1000) SS_LGUI("1") SS_DELAY(1000) SS_TAP(X_ESC) SS_DELAY(100)
-            //add comment of what lab it is
-            SS_TAP(X_RGHT) "HTN 09"
-            //shift cursor back to left most cell
-            SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100)
-            // //select row
-            SS_LSFT(SS_TAP(X_SPC))
-            //highlight row
-            SS_LALT("h") SS_DELAY(100) "h" SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100) SS_TAP(X_ENTER) SS_DELAY(100)
-            //move down cell to next row
-            SS_TAP(X_DOWN)
-            //save the file
-            // SS_LCTL("s")
-            SS_DELAY(1000)
-
-
-
-            //set win 1 as excel window and win 2 as the epic window
-            //In excel: highlight cell of patient UID
-            SS_LCTL("c") SS_DELAY(100) SS_LGUI("m") SS_DELAY(100)
-            //Switch to epic and open orders only enounter
-            SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LCTL("w") SS_DELAY(4000) SS_LCTL("5")
-            //Fill in the details for orders only encounter
-            //this next line is  tabbing to the CSN x10¸
-            SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) //Clinic
-            SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)
-            //SS_LSFT(SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)) //Corp laptop
-
-            // Pasting in the CSN and then opening the orders only encounter
-            SS_DELAY(1000) SS_LCTL("v") SS_DELAY(1000) SS_LALT("fs") SS_DELAY(1500)
-            //switching back to excel to copy the date
-            SS_LGUI("m") SS_DELAY(100) SS_LGUI("1") SS_DELAY(100) SS_TAP(X_ESC) SS_DELAY(100) SS_LCTL(SS_TAP(X_RGHT)) SS_DELAY(100) SS_LCTL("c")
-            //Delay excel -> epic opening orders field
-            SS_DELAY(4000)
-            //switch back to epic and open up orders
-            SS_LGUI("m") SS_DELAY(100) SS_LGUI("2") SS_DELAY(100) SS_LGUI(SS_TAP(X_UP))SS_DELAY(1000) SS_LCTL("o") SS_DELAY(1000)
-
-            //at order specific section
-            "hypertensive panel" SS_DELAY(200) SS_TAP(X_ENTER) SS_DELAY(2000)
-            SS_LALT("f") SS_DELAY(2000) SS_TAP(X_ENTER) SS_DELAY(4000)
-            SS_LCTL("v") //paste back the date
-            SS_DELAY(2000)
-
-            //sending order
-            SS_LALT("s") SS_DELAY(1000)
-            SS_LCTL(SS_LSFT("e")) SS_DELAY(3000)
-
-            //MOVING BACK TO EXCEL AND SORTING THE FILE
-            //switch to excel
-            SS_LGUI("m") SS_LGUI("2") SS_DELAY(1000) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP)) SS_DELAY(100) SS_LGUI(SS_TAP(X_UP))
-            SS_DELAY(1000) SS_LGUI("1") SS_DELAY(1000) SS_TAP(X_ESC) SS_DELAY(100)
-            //add comment of what lab it is
-            SS_TAP(X_RGHT) "HTN 10 - loop end"
-            //shift cursor back to left most cell
-            SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100)
-            // //select row
-            SS_LSFT(SS_TAP(X_SPC))
-            //highlight row
-            SS_LALT("h") SS_DELAY(100) "h" SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100) SS_TAP(X_ENTER) SS_DELAY(100)
-            //move down cell to next row
-            SS_TAP(X_DOWN)
-            //save the file
-            SS_LCTL("s")
-            SS_DELAY(1000)
-
-
-
-
-
 
             );
           }
