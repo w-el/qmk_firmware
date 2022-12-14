@@ -1,0 +1,49 @@
+//Open orders only encounter
+SS_LCTL("c")
+SS_LGUI("2")
+SS_LCTL("1")
+SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB) SS_TAP(X_TAB)
+SS_LCTL("v")
+SS_LALT("fs")
+SS_DELAY(10000)
+
+//Get date of lab test from excel
+SS_LGUI("1")
+SS_LCTL(SS_TAP(X_RGHT))
+SS_LCTL("c")
+SS_DELAY(1000)
+
+//Inputting orders
+SS_LGUI("2")
+SS_DELAY(1000)
+SS_LCTL("o")
+SS_DELAY(1000)
+"[LAB TEST]"
+SS_LALT("f")
+SS_DELAY(1000)
+SS_TAP(X_ENTER)
+SS_DELAY(3500)
+SS_LCTL("v")
+
+//Sending orders
+SS_LALT("s")
+SS_DELAY(2000)
+SS_LCTL(SS_LSFT("e"))
+SS_DELAY(10000)
+
+//Excel file management
+SS_LGUI("1")
+SS_TAP(X_RGHT)
+"[LAB TEST]"
+SS_LCTL(SS_TAP(X_LEFT))
+SS_LSFT(SS_TAP(X_SPC))
+SS_LALT("h")
+"h"
+SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP)
+SS_DELAY(100)
+SS_TAP(X_ENTER)
+SS_DELAY(100)
+SS_TAP(X_DOWN)
+// #SAVE
+SS_LCTL("s")
+SS_DELAY(5000)
