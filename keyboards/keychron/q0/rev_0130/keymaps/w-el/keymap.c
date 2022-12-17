@@ -21,7 +21,7 @@ enum layers { _BASE, _FN1};
 enum q0_keycodes {
   BASE = SAFE_RANGE,
   FN1,
-  HTN_SINGLE,
+  HTN_SINGLE, 
   HTN_LOOP,
   DM_SINGLE,
   DM_LOOP,
@@ -90,13 +90,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             //Excel file management SS_DELAY(100)
             SS_LGUI("1") SS_DELAY(100)
             SS_TAP(X_RGHT) SS_DELAY(100)
-            "HTN single" SS_DELAY(100)
-            SS_DELAY(100) SS_DELAY(100)
-            SS_LCTL(SS_TAP(X_LEFT)) SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100) SS_DELAY(100)
-            SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100)
-            SS_LALT("h") SS_DELAY(100) "h" SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100) SS_TAP(X_ENTER) SS_DELAY(100) SS_DELAY(100)
-            SS_TAP(X_DOWN) SS_DELAY(100)
+            "HTN" SS_DELAY(100)
              SS_DELAY(100)
+            SS_DELAY(500) SS_DELAY(100)
+            SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100)
+            SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100)
+            SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100)
+            SS_LALT("h") SS_DELAY(100)
+            "h" SS_DELAY(100)
+            SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100)
+            SS_DELAY(100) SS_DELAY(100)
+            SS_TAP(X_ENTER) SS_DELAY(100)
+            SS_DELAY(100) SS_DELAY(100)
+            SS_TAP(X_DOWN) SS_DELAY(100)
              SS_DELAY(100)
             //#hs_section
 
@@ -146,14 +152,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SS_LGUI("1") SS_DELAY(100)
             SS_TAP(X_RGHT) SS_DELAY(100)
             "HTN 01 - loop start" SS_DELAY(100)
-            SS_DELAY(100) SS_DELAY(100)
-            SS_LCTL(SS_TAP(X_LEFT)) SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100) SS_DELAY(100)
+             SS_DELAY(100)
+            SS_DELAY(500) SS_DELAY(100)
+            SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100)
             SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100)
-            SS_LALT("h") SS_DELAY(100) "h" SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100) SS_TAP(X_ENTER) SS_DELAY(100) SS_DELAY(100)
+            SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100)
+            SS_LALT("h") SS_DELAY(100)
+            "h" SS_DELAY(100)
+            SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100)
+            SS_DELAY(100) SS_DELAY(100)
+            SS_TAP(X_ENTER) SS_DELAY(100)
+            SS_DELAY(100) SS_DELAY(100)
             SS_TAP(X_DOWN) SS_DELAY(100)
              SS_DELAY(100)
-             SS_DELAY(100)
-
+            
              SS_DELAY(2000)//Open orders only encounter SS_DELAY(100)
             SS_LCTL("c") SS_DELAY(100)
             SS_LGUI("2") SS_DELAY(500) SS_DELAY(100)
@@ -188,14 +200,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SS_LGUI("1") SS_DELAY(100)
             SS_TAP(X_RGHT) SS_DELAY(100)
             "HTN 02" SS_DELAY(100)
-            SS_DELAY(100) SS_DELAY(100)
-            SS_LCTL(SS_TAP(X_LEFT)) SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100) SS_DELAY(100)
+             SS_DELAY(100)
+            SS_DELAY(500) SS_DELAY(100)
+            SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100)
             SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100)
-            SS_LALT("h") SS_DELAY(100) "h" SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100) SS_TAP(X_ENTER) SS_DELAY(100) SS_DELAY(100)
+            SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100)
+            SS_LALT("h") SS_DELAY(100)
+            "h" SS_DELAY(100)
+            SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100)
+            SS_DELAY(100) SS_DELAY(100)
+            SS_TAP(X_ENTER) SS_DELAY(100)
+            SS_DELAY(100) SS_DELAY(100)
             SS_TAP(X_DOWN) SS_DELAY(100)
              SS_DELAY(100)
-             SS_DELAY(100)
-
+            
              SS_DELAY(2000)//Open orders only encounter SS_DELAY(100)
             SS_LCTL("c") SS_DELAY(100)
             SS_LGUI("2") SS_DELAY(500) SS_DELAY(100)
@@ -230,14 +248,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SS_LGUI("1") SS_DELAY(100)
             SS_TAP(X_RGHT) SS_DELAY(100)
             "HTN 03 - loop end" SS_DELAY(100)
-            SS_DELAY(100) SS_DELAY(100)
-            SS_LCTL(SS_TAP(X_LEFT)) SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100) SS_DELAY(100)
+             SS_DELAY(100)
+            SS_DELAY(500) SS_DELAY(100)
+            SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100)
             SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100)
-            SS_LALT("h") SS_DELAY(100) "h" SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100) SS_TAP(X_ENTER) SS_DELAY(100) SS_DELAY(100)
+            SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100)
+            SS_LALT("h") SS_DELAY(100)
+            "h" SS_DELAY(100)
+            SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100)
+            SS_DELAY(100) SS_DELAY(100)
+            SS_TAP(X_ENTER) SS_DELAY(100)
+            SS_DELAY(100) SS_DELAY(100)
             SS_TAP(X_DOWN) SS_DELAY(100)
              SS_DELAY(100)
-             SS_DELAY(100)
-
+            
              SS_DELAY(2000)//#hl_section
 
 	    // #SAVE
@@ -285,13 +309,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             //Excel file management SS_DELAY(100)
             SS_LGUI("1") SS_DELAY(100)
             SS_TAP(X_RGHT) SS_DELAY(100)
-            "DM single" SS_DELAY(100)
-            SS_DELAY(100) SS_DELAY(100)
-            SS_LCTL(SS_TAP(X_LEFT)) SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100) SS_DELAY(100)
-            SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100)
-            SS_LALT("h") SS_DELAY(100) "h" SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100) SS_TAP(X_ENTER) SS_DELAY(100) SS_DELAY(100)
-            SS_TAP(X_DOWN) SS_DELAY(100)
+            "DM" SS_DELAY(100)
              SS_DELAY(100)
+            SS_DELAY(500) SS_DELAY(100)
+            SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100)
+            SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100)
+            SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100)
+            SS_LALT("h") SS_DELAY(100)
+            "h" SS_DELAY(100)
+            SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100)
+            SS_DELAY(100) SS_DELAY(100)
+            SS_TAP(X_ENTER) SS_DELAY(100)
+            SS_DELAY(100) SS_DELAY(100)
+            SS_TAP(X_DOWN) SS_DELAY(100)
              SS_DELAY(100)
             //#ds_section
 
@@ -341,14 +371,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SS_LGUI("1") SS_DELAY(100)
             SS_TAP(X_RGHT) SS_DELAY(100)
             "DM 01 - loop start" SS_DELAY(100)
-            SS_DELAY(100) SS_DELAY(100)
-            SS_LCTL(SS_TAP(X_LEFT)) SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100) SS_DELAY(100)
+             SS_DELAY(100)
+            SS_DELAY(500) SS_DELAY(100)
+            SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100)
             SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100)
-            SS_LALT("h") SS_DELAY(100) "h" SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100) SS_TAP(X_ENTER) SS_DELAY(100) SS_DELAY(100)
+            SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100)
+            SS_LALT("h") SS_DELAY(100)
+            "h" SS_DELAY(100)
+            SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100)
+            SS_DELAY(100) SS_DELAY(100)
+            SS_TAP(X_ENTER) SS_DELAY(100)
+            SS_DELAY(100) SS_DELAY(100)
             SS_TAP(X_DOWN) SS_DELAY(100)
              SS_DELAY(100)
-             SS_DELAY(100)
-
+            
              SS_DELAY(2000)//Open orders only encounter SS_DELAY(100)
             SS_LCTL("c") SS_DELAY(100)
             SS_LGUI("2") SS_DELAY(500) SS_DELAY(100)
@@ -383,14 +419,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SS_LGUI("1") SS_DELAY(100)
             SS_TAP(X_RGHT) SS_DELAY(100)
             "DM 02" SS_DELAY(100)
-            SS_DELAY(100) SS_DELAY(100)
-            SS_LCTL(SS_TAP(X_LEFT)) SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100) SS_DELAY(100)
+             SS_DELAY(100)
+            SS_DELAY(500) SS_DELAY(100)
+            SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100)
             SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100)
-            SS_LALT("h") SS_DELAY(100) "h" SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100) SS_TAP(X_ENTER) SS_DELAY(100) SS_DELAY(100)
+            SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100)
+            SS_LALT("h") SS_DELAY(100)
+            "h" SS_DELAY(100)
+            SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100)
+            SS_DELAY(100) SS_DELAY(100)
+            SS_TAP(X_ENTER) SS_DELAY(100)
+            SS_DELAY(100) SS_DELAY(100)
             SS_TAP(X_DOWN) SS_DELAY(100)
              SS_DELAY(100)
-             SS_DELAY(100)
-
+            
              SS_DELAY(2000)//Open orders only encounter SS_DELAY(100)
             SS_LCTL("c") SS_DELAY(100)
             SS_LGUI("2") SS_DELAY(500) SS_DELAY(100)
@@ -425,16 +467,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SS_LGUI("1") SS_DELAY(100)
             SS_TAP(X_RGHT) SS_DELAY(100)
             "DM 03 - loop end" SS_DELAY(100)
-            SS_DELAY(100) SS_DELAY(100)
-            SS_LCTL(SS_TAP(X_LEFT)) SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100) SS_DELAY(100)
+             SS_DELAY(100)
+            SS_DELAY(500) SS_DELAY(100)
+            SS_LCTL(SS_TAP(X_LEFT)) SS_DELAY(100)
             SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100)
-            SS_LALT("h") SS_DELAY(100) "h" SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100) SS_TAP(X_ENTER) SS_DELAY(100) SS_DELAY(100)
+            SS_LSFT(SS_TAP(X_SPC)) SS_DELAY(100)
+            SS_LALT("h") SS_DELAY(100)
+            "h" SS_DELAY(100)
+            SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_DELAY(100)
+            SS_DELAY(100) SS_DELAY(100)
+            SS_TAP(X_ENTER) SS_DELAY(100)
+            SS_DELAY(100) SS_DELAY(100)
             SS_TAP(X_DOWN) SS_DELAY(100)
              SS_DELAY(100)
-             SS_DELAY(100)
-
+            
              SS_DELAY(2000)//#dl_section
-
+            
 	    // #SAVE
             SS_LCTL("s")
             SS_DELAY(5000)
@@ -442,7 +490,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             );
           }
           break;
-/*=================================================================================*/
+/*=================================================================================*/        
         case LINE:
           if (record->event.pressed)
           {
